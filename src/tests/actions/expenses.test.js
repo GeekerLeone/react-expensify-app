@@ -1,11 +1,19 @@
-import {startAddExpense, addExpense, editExpense, removeExpense} from '../../actions/expenses';
+import {startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpense} from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { database } from '../../firebase/firebase';
-import {ref, push, get} from "firebase/database";
+import {ref, push, get, set} from "firebase/database";
 
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach((done)=>{
+    const expenseData = {};
+    expenses.forEach(({id, description, amount, createdAt, note})=>{
+        expenseData[id] = { description, amount, createdAt, note}
+    });
+    set(ref(database,'expenses'), expenseData).then(() => done());
+})
 
 test('should setup remove expense action object', () =>{
     const action = removeExpense({id: '123asd'});
@@ -84,21 +92,22 @@ test('should add expense with default to database and store', (done)=> {
     })
 })
 
-test('should add expense to database and store', ()=> {
-    
+test('should setup set expense action object with data', ()=> {
+    const action = setExpenses(expenses);
+    expect(action).toEqual({
+        type: 'SET_EXPENSES',
+        expenses
+    })
 })
-// test('should setup add expense action object with default values', () =>{
-//     const expenseData = {};
-//     const action = addExpense(expenseData);
-//     expect(action).toEqual({
-//         type:'ADD_EXPENSE',
-//         expense:{
-//             id:expect.any(String),
-//             description: '', 
-//             note: '', 
-//             amount: 0, 
-//             createdAt: 0
-//         }
-        
-//     })
-// }) 
+
+test('should fetch the expenses from firebase', (done)=>{
+    const store = createMockStore({});
+    store.dispatch(startSetExpense()).then(()=>{
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'SET_EXPENSES',
+            expenses
+        })
+        done();
+    })
+})
