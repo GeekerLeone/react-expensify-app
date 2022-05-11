@@ -4,7 +4,7 @@ exports[`should render DashboardPage correctly 1`] = `
 <div>
   Not Found 404! - 
   <[object Object]
-    to="/"
+    to="/dashboard"
   >
     Go home
   </[object Object]>

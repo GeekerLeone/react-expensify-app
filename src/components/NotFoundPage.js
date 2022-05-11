@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 const NotFoundPage = () =>(
     <div>
-    Not Found 404! - <Link to='/'>Go home</Link>
+    Not Found 404! - <Link to='/dashboard'>Go home</Link>
     </div>
 );
 

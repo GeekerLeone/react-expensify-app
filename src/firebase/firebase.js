@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { DataSnapshot, get, getDatabase, off, onValue, ref, remove, set, update, push, onChildMoved, onChildRemoved, onChildChanged, onChildAdded} from "firebase/database";
+import {getAuth, GoogleAuthProvider } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,9 +19,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const googleAuthProvider = new GoogleAuthProvider();
 export const database = getDatabase();
-
-
+export const auth = getAuth();
 // set(ref(database), {
 //   name: 'Andrew',
 //   age:26,

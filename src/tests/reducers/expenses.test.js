@@ -41,10 +41,10 @@ test('should set edit expense', () =>{
     const action = {
         type: 'EDIT_EXPENSE',
         id: '0',
-        update: {amount: 0}
+        updates: {amount: 0}
     }
     const result = expensesReducer(expenses, action);
-    expect(result[0].amount).toEqual(action.update.amount)
+    expect(result[0].amount).toEqual(action.updates.amount)
 })
 
 test('should set edit unfound expense', () =>{

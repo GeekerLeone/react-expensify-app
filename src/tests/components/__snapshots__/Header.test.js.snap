@@ -8,7 +8,7 @@ exports[`should render Header correctly 1`] = `
   <nav>
     <[object Object]
       className={[Function]}
-      to="/"
+      to="/dashboard"
     >
       Dashboard
     </[object Object]>
@@ -18,12 +18,11 @@ exports[`should render Header correctly 1`] = `
     >
       Create Expense
     </[object Object]>
-    <[object Object]
-      className={[Function]}
-      to="/help"
+    <button
+      onClick={[Function]}
     >
-      Help
-    </[object Object]>
+      Logout
+    </button>
   </nav>
   <Outlet />
 </header>
