@@ -13,6 +13,12 @@ const EditExpensePage = (props) =>{
     const expense = useSelector((state) => state.expenses.find(expense => expense.id === id));
     return(
     <div>
+        <div className="page-header">
+            <div className="content-container">
+            <h1 className="page-header__title">Edit Expense</h1>
+            </div>
+        </div>  
+        <div className="content-container">
         <ExpenseForm 
         expense = {expense}
         onSubmit={(expense) => {
@@ -22,13 +28,15 @@ const EditExpensePage = (props) =>{
             
         }}
         />
-        <button 
+        <button className="button button--remove"
         onClick={() =>{
             props.dispatch(startRemoveExpense({id: id}))
             navigate('/dashboard')
         }}
-        >Remove</button>
-    </div>
+        >Remove Expense</button>
+        </div>
+        </div>
+        
     );
 }
 
